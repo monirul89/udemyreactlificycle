@@ -1,12 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// COMPONENTS
+import Home from './componet/home';
+import Posts from './componet/posts';
+import Profiles from './componet/profiles'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+//myawesomeapp.com/posts
+//myawesomeapp.com/profile/posts
+
+const App =()=>{
+    return (
+        <BrowserRouter>
+        <div>
+            <header>
+                <Link to="/">Home</Link><br/>
+                <Link to="/posts">Posts</Link><br/>
+                <Link to={{
+                    pathname:'/profile',
+                    hash:'#francis',
+                    search:'?profile=true'
+                }}>Profiles</Link><br/>
+            </header>
+            <hr/>
+            <Route path="/" exact component={Home} />
+            <Route path="/posts" component={Posts} />
+            <Route path="/profile" component={Profiles}/>
+
+<hr/>
+            <footer>
+                Footer
+            </footer>
+        </div>
+        </BrowserRouter>
+    )
+}
+
+ReactDOM.render(
+    <App />,
+    document.querySelector('#root')
+)
